@@ -1,0 +1,118 @@
+model dinamico_coches
+
+enum TipoRevision {reparacion, mantenimiento}
+
+class Ciudad
+    attributes
+        Nombre: String
+end
+
+associationclass Recorrido between
+        Ciudad[0..*] role ciudad1 --- por ver si es 1..*
+        Ciudad[0..*] role ciudad2 --- por ver si es 1..*
+    attributes
+        Distancia: Real
+end
+
+class Clock
+    attributes
+        NOW : Integer init = 0
+        resolution: Integer init = 1
+    operations
+        tick()
+            begin
+                self.NOW := self.NOW + self.resolution
+                for o in self.ao do
+                    o.tick()
+                end;
+            end
+            post TimePasses: self.NOW = self.NOW@pre + self.resolution
+        run (t:Integer)
+            begin
+                for i in Sequence{1..t} do
+                    self.tick()
+                end
+            end
+    constraints
+        inv PositiveResolution: self.resolution > 0
+end
+
+abstract class ActiveObject -- real-time objects 
+  operations
+    tick() begin end 
+end
+
+association Time between
+    Clock[1] role clock
+    ActiveObject[*] role ao ordered
+end
+
+class Coche < ActiveObject
+    attributes
+        Fecha_Matriculacion: Integer
+        posicion : Real init: 0
+        Kilometros_Reccoridos: Real init: 0
+        Velocidad: Real
+        enGarantia: boolean
+    operations
+        avanzar() : Integer = posicion + Velocidad
+        
+end
+
+class Recorrido
+    attributes
+        Distancia: Real
+end
+
+class Viaje
+    attributes
+        Fecha_Salida: Integer
+        Fecha_Llegada: Integer
+    
+    operations
+end
+
+
+class Taller
+    attributes
+        oficial: boolean
+        garantia: Integer
+    operations
+end
+
+class Revision
+    attributes
+        Tipo: TipoRevision
+        Fecha_Inicio: Integer
+        Fecha_Fin: Integer
+end
+
+association Time between 
+  Clock [1] role clock
+  ActiveObject [*] role ao ordered
+end
+
+association CiudadTaller between
+    Ciudad[1..1] role ciudad
+    Taller[1..*] role talleres
+end
+
+association RevisionCoche between
+    Coche[1..1] role coche
+    Revision[0..*] role revisiones
+end
+
+association RevisionTaller between
+    Taller[1..1] role taller
+    Revision[0..*] role revisiones
+end
+
+association CocheViaje between
+    Coche[1..1] role coche
+    Viaje[0..*] role viajes
+end
+
+association ViajeRecorrido between 
+    Viaje[0..*] role viajes
+    Recorrido[1..1] role recorrido   
+end
