@@ -1,0 +1,28 @@
+reset
+
+!new Clock('C')
+
+!new Ciudad('Malaga')
+!Malaga.Nombre := 'Malaga'
+!new Ciudad('Sevilla')
+!Sevilla.Nombre := 'Sevilla'
+!new Ciudad('Granada')
+!Granada.Nombre := 'Granada'
+
+!insert(Malaga, Sevilla) into Recorrido -- Recorrido1
+!Recorrido1.distancia := 210
+
+!insert(Sevilla, Granada) into Recorrido -- Recorrido2
+!Recorrido2.distancia := 250
+
+!new Coche('Car1')
+!Car1.fechaMatriculacion := 0
+!Car1.velocidad := 27
+
+!insert(C, Car1) into Time
+!C.run(5)
+
+!Car1.empezarViaje(Recorrido1)
+!C.run(8)
+!Car1.empezarViaje(Recorrido2)
+!C.run(15)
