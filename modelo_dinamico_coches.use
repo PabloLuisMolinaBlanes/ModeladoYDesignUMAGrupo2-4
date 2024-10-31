@@ -46,7 +46,7 @@ class Coche < ActiveObject
         posicion : Real init: 0
         velocidad: Real
         kilometrosRecorridos : Real derive : 
-            self.viajes->collect(v|v.recorrido.distancia)->sum()
+            self.viajes->select(not fechaLlegada.isUndefined())->collect(v|v.recorrido.distancia)->sum() + self.viajes->select(fechaLlegada.isUndefined())->size() * self.posicion
         enGarantia : Boolean derive : -- pillar el taller oficial con la garantia + fecha de fin de revision mas alta
             self.clock.NOW - self.fechaMatriculacion < 400 
             or self.revisiones->select(r | r.fechaFin + r.taller.garantia > self.clock.NOW)->size() > 0
@@ -69,12 +69,13 @@ class Coche < ActiveObject
         empezarViaje(valor:Recorrido)
             begin
                 declare newViaje : Viaje;
+                self.posicion := 0;
                 newViaje := new Viaje();
                 newViaje.fechaSalida := self.clock.NOW;
                 insert (newViaje, valor) into ViajeRecorrido;
                 insert (self,newViaje) into CocheViaje;
             end
-            pre NoEstaViajando: not self.viajes->sortedBy(v | v.fechaSalida)->last().fechaLlegada.isUndefined()
+            pre NoEstaViajando: not self.viajes->sortedBy(v | v.fechaSalida)->last().fechaLlegada.isUndefined() or self.viajes->size = 0
             pre EstaEnCiudad: self.viajes->isEmpty() or self.viajes->sortedBy(v | v.fechaSalida)->last().recorrido.ciudadDestino = valor.ciudadOrigen
         --terminarViaje(valor: Viaje)
           --  begin
@@ -82,12 +83,11 @@ class Coche < ActiveObject
           --  end
         tick()
             begin
-                if self.viajes->sortedBy(v | v.fechaSalida)->last().fechaLlegada.isUndefined() then
+                if self.viajes->size() > 0 and self.viajes->sortedBy(v | v.fechaSalida)->last().fechaLlegada.isUndefined() then
                     self.avanzar();
                 end
             end
 end
-
 associationclass Recorrido between
         Ciudad[1..1] role ciudadOrigen --- por ver si es 1..*
         Ciudad[1..1] role ciudadDestino --- por ver si es 1..*
