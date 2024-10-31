@@ -44,9 +44,15 @@ class Coche < ActiveObject
     attributes
         fechaMatriculacion: Integer
         posicion : Real init: 0
-        kilometrosRecorridos: Real init: 0
         velocidad: Real
-        enGarantia: Boolean
+        kilometrosRecorridos : Real derive : 
+            self.viajes->collect(v|v.recorrido.distancia)->sum()
+        enGarantia : Boolean derive : -- pillar el taller oficial con la garantia + fecha de fin de revision mas alta
+            self.clock.NOW - self.fechaMatriculacion < 400 
+            or self.revisiones->select(r | r.fechaFin + r.taller.garantia > self.clock.NOW)->size() > 0
+        necesitaMantenimiento : Boolean derive :
+             not (self.clock.NOW - self.fechaMatriculacion < 400)
+             and not (self.revisiones->select(r | r.tipo = TipoRevision::mantenimiento and self.clock.NOW - r.fechaFin <= 100)->size() > 0)
     operations
         avanzar() 
             begin
@@ -117,7 +123,7 @@ end
 
 association CiudadTaller between
     Ciudad[1..1] role Ciudad
-    Taller[1..*] role talleres
+    Taller[0..*] role talleres
 end
 
 association RevisionCoche between

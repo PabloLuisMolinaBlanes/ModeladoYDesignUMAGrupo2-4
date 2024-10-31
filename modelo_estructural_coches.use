@@ -65,7 +65,7 @@ end
 
 association CiudadTaller between
     Ciudad[1..1] role Ciudad
-    Taller[1..*] role talleres
+    Taller[0..*] role talleres
 end
 
 association RevisionCoche between
