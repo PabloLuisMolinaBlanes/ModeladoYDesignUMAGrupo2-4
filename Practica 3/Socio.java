@@ -1,10 +1,26 @@
-public class Socio {
+import java.util.Date;
 
-	Refugio refugio;
-	private Date registro;
+public abstract class Socio {
+    private Date registro;
+    private Refugio refugio;
 
-	public Date getRegistro() {
-		return this.registro;
-	}
+    public Socio(Date registro, Refugio refugio) {
+        this.setRegistro(registro);
+        this.setRefugio(refugio);
+    }
+    public Date getRegistro() {
+        return registro;
+    }
 
+    public void setRegistro(Date registro) {
+        this.registro = registro;
+    }
+
+    public Refugio getRefugio() {
+        return refugio;
+    }
+
+    public void setRefugio(Refugio refugio) {
+        this.refugio = refugio;
+    }
 }

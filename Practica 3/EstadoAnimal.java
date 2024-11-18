@@ -1,5 +1,3 @@
 public enum EstadoAnimal {
-	disponible,
-	adoptado,
-	enTratamiento
+    adoptado, enTratamiento, disponible
 }

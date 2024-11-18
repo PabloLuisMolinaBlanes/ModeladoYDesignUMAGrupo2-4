@@ -1,16 +1,13 @@
-import java.util.*;
-
+import java.util.Date;
 public class Adoptante extends Socio {
-
-	Collection<Adopcion> adopciones;
-
-	/**
+    public Adoptante(Date registro,Refugio refu) {
+        super(registro,refu);
+    }
+    /**
 	 * 
 	 * @param a
 	 */
-	public void adoptar(Animal a) {
-		// TODO - implement Adoptante.adoptar
-		throw new UnsupportedOperationException();
-	}
-
+    public void adoptar(Animal a) {
+        a.setEstado(EstadoAnimal.adoptado);
+    }
 }

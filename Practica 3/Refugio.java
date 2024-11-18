@@ -1,19 +1,35 @@
-import java.util.*;
+import java.util.ArrayList;
 
 public class Refugio {
+    private Float liquidez;
+    private ArrayList<Animal> animalesRefugiados;
+    private ArrayList<Animal> animalesRegistrados;
 
-	Collection<Animal> animalesRefugiados;
-	Collection<Socio> socios;
-	Collection<Animal> animalesRegistados;
-	private float liquidez;
-
+    public Refugio(Float liquidez) {
+        this.liquidez = liquidez;
+        this.animalesRefugiados = new ArrayList<Animal>();
+        this.animalesRegistrados = new ArrayList<Animal>();
+    }
 	/**
 	 * 
 	 * @param a
 	 */
-	public void registrar(Animal a) {
-		// TODO - implement Refugio.registrar
-		throw new UnsupportedOperationException();
-	}
-
+    public void registrar(Animal a) {
+        this.animalesRegistrados.add(a);
+    }
+    
+    public Float getLiquidez() {
+        return liquidez;
+    }
+    
+    public void setLiquidez(Float liquidez) {
+        this.liquidez = liquidez;
+    }
+    
+    public ArrayList<Animal> getAnimalesRefugiados() {
+        return animalesRefugiados;
+    }
+    public ArrayList<Animal> getAnimalesRegistrados() {
+        return animalesRegistrados;
+    }
 }
