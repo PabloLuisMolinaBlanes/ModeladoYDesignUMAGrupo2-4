@@ -4,18 +4,28 @@ public class Adopcion {
     private Date fecha;
     private Animal animal;
     private Adoptante adoptante;
+    private Voluntario voluntario;
 
-    public Adopcion(Date fecha, Animal animal, Adoptante adoptante) {
+    public Adopcion(Date fecha, Animal animal, Adoptante adoptante, Voluntario voluntario) {
         this.setFecha(fecha);
         this.setAnimal(animal);
         this.setAdoptante(adoptante);
         this.animal.setAdopcion(this);
+        this.animal.setTramiteAdopcion(voluntario);
     }
     
     public Date getFecha() {
         return fecha;
     }
-
+    
+    public Voluntario getTramiteAdopcion() {
+    	return this.voluntario;
+    }
+    
+    public void setTramiteAdopcion(Voluntario voluntario) {
+    	voluntario.tramitarAdopcion(this, getAdoptante());
+    }
+    
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }

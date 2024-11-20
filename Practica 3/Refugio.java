@@ -4,11 +4,13 @@ public class Refugio {
     private Float liquidez;
     private ArrayList<Animal> animalesRefugiados;
     private ArrayList<Animal> animalesRegistrados;
+    private ArrayList<Socio> sociosRegistrados;
 
     public Refugio(Float liquidez) {
         this.liquidez = liquidez;
         this.animalesRefugiados = new ArrayList<Animal>();
         this.animalesRegistrados = new ArrayList<Animal>();
+        this.sociosRegistrados = new ArrayList<Socio>();
     }
 	/**
 	 * 
@@ -31,5 +33,8 @@ public class Refugio {
     }
     public ArrayList<Animal> getAnimalesRegistrados() {
         return animalesRegistrados;
+    }
+    public ArrayList<Socio> getSociosRegistrados() {
+        return sociosRegistrados;
     }
 }
