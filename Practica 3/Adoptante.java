@@ -7,7 +7,7 @@ public class Adoptante extends Socio {
 	 * 
 	 * @param a
 	 */
-    public void adoptar(Animal a) {
-        a.setEstado(EstadoAnimal.adoptado);
+    public void adoptar(Animal animal, Voluntario voluntario) {
+        voluntario.tramitarAdopcion(animal, this);
     }
 }

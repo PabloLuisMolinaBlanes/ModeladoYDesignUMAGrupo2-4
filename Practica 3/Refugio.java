@@ -17,6 +17,8 @@ public class Refugio {
 	 * @param a
 	 */
     public void registrar(Animal a) {
+        a.setEstado(EstadoAnimal.disponible);
+        this.animalesRefugiados.add(a);
         this.animalesRegistrados.add(a);
     }
     

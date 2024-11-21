@@ -14,8 +14,11 @@ public class Voluntario extends Socio {
     }
 
     public void tramitarAdopcion(Animal a, Adoptante ad) {
-        Adopcion adopcion = new Adopcion(new Date(), a, ad);
-        adopciones.add(adopcion);   
+        Adopcion adopcion = new Adopcion(new Date(), a, ad, this);
+        this.getRefugio().getAnimalesRefugiados().remove(a);
+        a.setAdopcion(adopcion);
+        a.setEstado(EstadoAnimal.adoptado);
+        adopciones.add(adopcion);
     }
 
 	/**
@@ -24,7 +27,7 @@ public class Voluntario extends Socio {
 	 * @param r
 	 */
 
-    public void registrar(Animal a, Refugio r) {
-        r.registrar(a);
+    public void registrar(Animal a) {
+        getRefugio().registrar(a);
     }
 }
