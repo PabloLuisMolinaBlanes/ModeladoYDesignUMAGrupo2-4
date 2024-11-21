@@ -11,7 +11,7 @@ public class Adopcion {
         this.setAnimal(animal);
         this.setAdoptante(adoptante);
         this.animal.setAdopcion(this);
-        this.animal.setTramiteAdopcion(voluntario);
+        this.voluntario.setTramiteAdopcion(animal, adoptante);
     }
     
     public Date getFecha() {
