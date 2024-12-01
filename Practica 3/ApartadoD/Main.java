@@ -42,5 +42,19 @@ public class Main {
         // Print number of registered animals
         System.out.println("Number of registered animals: " + refugio.getAnimalesRegistrados().size());
 
+        //Socio no tiene el rol de adoptante
+        try {
+            socio.adoptar(animal, socio);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //Socio2 no tiene el rol de voluntario
+        try {
+            socio2.tramitarAdopcion(animal, socio);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
