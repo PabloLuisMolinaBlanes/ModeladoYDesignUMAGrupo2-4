@@ -3,13 +3,14 @@ package ApartadoC;
 import java.util.Date;
 import java.util.ArrayList;
 
-public abstract class Socio implements Voluntario, Donante, Adoptante {
+public class Socio implements Voluntario, Donante, Adoptante {
     private Date registro;
     private Refugio refugio;
+    private Socio socio;
     private ArrayList<Adopcion> adopciones;
     private ArrayList<Donacion> donaciones;
     public void tramitarAdopcion(Animal a, Adoptante ad) {
-        Adopcion adopcion = new Adopcion(new Date(), a, ad, this);
+        Adopcion adopcion = new Adopcion(new Date(), a, ad, socio);
         adopciones.add(adopcion);   
     }
     
@@ -31,12 +32,14 @@ public abstract class Socio implements Voluntario, Donante, Adoptante {
         this.setRefugio(refugio);
         this.setAdopciones(new ArrayList<Adopcion>());
         this.setDonaciones(new ArrayList<Donacion>());
+        socio = this;
     }
     
     public Socio(Date registro, Refugio refugio, ArrayList<Adopcion> adopciones) {
         this.setRegistro(registro);
         this.setRefugio(refugio);
         this.setAdopciones(adopciones);
+        socio = this;
     }
     
     public Date getRegistro() {
