@@ -1,8 +1,10 @@
-package ApartadoC;
+package ApartadoD;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public interface Donante {
-    public void donar(Float c);
+
+    ArrayList<Donacion> donaciones = new ArrayList<>();
+
+    void donar(Float cantidad);
 }

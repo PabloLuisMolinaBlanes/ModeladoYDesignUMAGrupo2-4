@@ -1,75 +1,74 @@
-package ApartadoC;
+package ApartadoD;
 
 import java.util.Date;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Socio implements Voluntario, Donante, Adoptante {
     private Date registro;
     private Refugio refugio;
-    private Socio socio;
-    private ArrayList<Adopcion> adopciones;
-    private ArrayList<Donacion> donaciones;
+    private Set<Class<?>> roles = new HashSet<>();
+
+    public Socio(Date registro, Refugio refugio) {
+        this.registro = registro;
+        this.refugio = refugio;
+    }
+
+    // Método para agregar roles al socio
+    public void addRole(Class<?> roleType) {
+        roles.add(roleType);
+    }
+
+    @Override
     public void tramitarAdopcion(Animal a, Adoptante ad) {
-        Adopcion adopcion = new Adopcion(new Date(), a, ad, socio);
-        adopciones.add(adopcion);   
+        if (!roles.contains(Voluntario.class)) {
+            throw new RuntimeException("El socio no tiene el rol de voluntario");
+        }
+        Adopcion adopcion = new Adopcion(new Date(), a, ad, this);
+        this.refugio.getAnimalesRefugiados().remove(a);
+        a.setAdopcion(adopcion);
+        a.setEstado(EstadoAnimal.adoptado);
+        adopciones.add(adopcion);
     }
-    
-    public void registrar(Animal a, Refugio r) {
-        r.registrar(a);
+
+    @Override
+    public void registrar(Animal a) {
+        if (!roles.contains(Voluntario.class)) {
+            throw new RuntimeException("El socio no tiene el rol de voluntario");
+        }
+        this.refugio.registrar(a);
     }
-    
+
+    @Override
     public void donar(Float c) {
+        if (!roles.contains(Donante.class)) {
+            throw new RuntimeException("El socio no tiene el rol de donante");
+        }
         Donacion d = new Donacion(c, new Date());
         donaciones.add(d);
-        Refugio refu = this.getRefugio();
+        Refugio refu = this.refugio;
         refu.setLiquidez(refu.getLiquidez() + d.getCantidad());
     }
-    public void adoptar(Animal a) {
-        a.setEstado(EstadoAnimal.adoptado);
+
+    @Override
+    public void adoptar(Animal a, Voluntario v) {
+        if (!roles.contains(Adoptante.class)) {
+            throw new RuntimeException("El socio no tiene el rol de adoptante");
+        }
+        v.tramitarAdopcion(a, this);
     }
-    public Socio(Date registro, Refugio refugio) {
-        this.setRegistro(registro);
-        this.setRefugio(refugio);
-        this.setAdopciones(new ArrayList<Adopcion>());
-        this.setDonaciones(new ArrayList<Donacion>());
-        socio = this;
-    }
-    
-    public Socio(Date registro, Refugio refugio, ArrayList<Adopcion> adopciones) {
-        this.setRegistro(registro);
-        this.setRefugio(refugio);
-        this.setAdopciones(adopciones);
-        socio = this;
-    }
-    
+
+    // Getter del registro
     public Date getRegistro() {
         return registro;
     }
-
     public void setRegistro(Date registro) {
         this.registro = registro;
     }
-
     public Refugio getRefugio() {
         return refugio;
     }
-
     public void setRefugio(Refugio refugio) {
         this.refugio = refugio;
-    }
-    public ArrayList<Adopcion> getAdopciones() {
-    	return adopciones;
-    }
-    
-    public void setAdopciones(ArrayList<Adopcion> adopciones) {
-    	this.adopciones = adopciones;
-    }
-    
-    public ArrayList<Donacion> getDonaciones() {
-    	return donaciones;
-    }
-    
-    public void setDonaciones(ArrayList<Donacion> donaciones) {
-    	this.donaciones = donaciones;
     }
 }

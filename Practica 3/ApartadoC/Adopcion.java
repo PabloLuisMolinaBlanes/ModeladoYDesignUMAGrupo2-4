@@ -1,4 +1,4 @@
-package ApartadoC;
+package ApartadoD;
 
 import java.util.Date;
 
@@ -6,14 +6,13 @@ public class Adopcion {
     private Date fecha;
     private Animal animal;
     private Adoptante adoptante;
-    private Socio socio;
+    private Voluntario voluntario;
 
-    public Adopcion(Date fecha, Animal animal, Adoptante adoptante, Socio socio) {
+    public Adopcion(Date fecha, Animal animal, Adoptante adoptante, Voluntario socio) {
         this.setFecha(fecha);
         this.setAnimal(animal);
         this.setAdoptante(adoptante);
-        this.animal.setAdopcion(this);
-        this.socio = socio;
+        this.voluntario = socio;
     }
     
     public Date getFecha() {
@@ -21,11 +20,11 @@ public class Adopcion {
     }
     
     public Voluntario getTramiteAdopcion() {
-    	return this.socio;
+    	return this.voluntario;
     }
     
     public void setTramiteAdopcion(Voluntario voluntario) {
-    	this.socio.tramitarAdopcion(this.animal, getAdoptante());
+    	this.voluntario.tramitarAdopcion(this.animal, getAdoptante());
     }
     
     public void setFecha(Date fecha) {

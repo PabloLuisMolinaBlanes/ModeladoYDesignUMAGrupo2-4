@@ -1,4 +1,4 @@
-import ApartadoC.*;
+package ApartadoD;
 
 import java.util.Date;
 
@@ -10,35 +10,51 @@ public class Main {
         // Create current date
         Date currentDate = new Date();
 
-        // Create a Voluntario (Volunteer)
         Socio socio = new Socio(currentDate, refugio);
+        Socio socio2 = new Socio(currentDate, refugio);
+
+        // Asignar roles al socio
+        socio.addRole(Voluntario.class);
+        socio.addRole(Donante.class);
+
+        socio2.addRole(Adoptante.class);
 
         // Create an Animal
         Animal animal = new Animal(currentDate, EstadoAnimal.disponible);
 
         // Register the animal in the shelter
-        socio.registrar(animal, refugio);
+        socio.registrar(animal);
 
         // Make a donation
         socio.donar(500.0f);
 
         // Process an adoption
+
+        socio.tramitarAdopcion(animal, socio2);
+        System.out.println("Adoption processed successfully!");
+
+        // Check animal's status
+        System.out.println("Animal status: " + animal.getEstado());
+
+        // Check shelter's current funds
+        System.out.println("Shelter's current funds: $" + refugio.getLiquidez());
+
+        // Print number of registered animals
+        System.out.println("Number of registered animals: " + refugio.getAnimalesRegistrados().size());
+
+        //Socio no tiene el rol de adoptante
         try {
-            socio.tramitarAdopcion(animal, socio);
-            System.out.println("Adoption processed successfully!");
-
-            // Check animal's status
-            System.out.println("Animal status: " + animal.getEstado());
-
-            // Check shelter's current funds
-            System.out.println("Shelter's current funds: $" + refugio.getLiquidez());
-
-            // Print number of registered animals
-            System.out.println("Number of registered animals: " +
-                    refugio.getAnimalesRegistrados().size());
-
-        } catch (Exception e) {
-            System.out.println("Error processing adoption: " + e.getMessage());
+            socio.adoptar(animal, socio);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
         }
+
+        //Socio2 no tiene el rol de voluntario
+        try {
+            socio2.tramitarAdopcion(animal, socio);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }

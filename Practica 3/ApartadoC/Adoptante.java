@@ -1,6 +1,5 @@
-package ApartadoC;
+package ApartadoD;
 
-import java.util.Date;
 public interface Adoptante {
-    public void adoptar(Animal a);
+    void adoptar(Animal animal, Voluntario voluntario);
 }
