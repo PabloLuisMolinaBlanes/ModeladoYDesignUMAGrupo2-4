@@ -3,7 +3,6 @@ import java.util.Date;
 public abstract class Socio {
     private Date registro;
     private Refugio refugio;
-    
 
     public Socio(Date registro, Refugio refugio) {
         this.setRegistro(registro);

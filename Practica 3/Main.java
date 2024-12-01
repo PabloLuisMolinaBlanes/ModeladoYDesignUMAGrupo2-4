@@ -21,7 +21,7 @@ public class Main {
         Animal animal = new Animal(currentDate, EstadoAnimal.disponible);
 
         // Register the animal in the shelter
-        voluntario.registrar(animal, refugio);
+        voluntario.registrar(animal);
 
         // Make a donation
         donante.donar(500.0f);
