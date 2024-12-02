@@ -18,7 +18,11 @@ public class Socio {
     }
 
     public <T> T getRole(Class<T> roleType) {
-        return roleType.cast(roles.get(roleType));
+        T rol = roleType.cast(roles.get(roleType));
+        if (rol == null) {
+            throw new IllegalArgumentException("El socio no tiene el rol solicitado: " + roleType.getSimpleName());
+        }
+        return rol;
     }
 
     public Date getRegistro() {

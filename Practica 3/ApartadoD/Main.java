@@ -41,6 +41,10 @@ public class Main {
         // Print number of registered animals
         System.out.println("Number of registered animals: " + refugio.getAnimalesRegistrados().size());
 
-
+        try{
+            socio.getRole(AdoptanteRol.class).adoptar(animal, socio.getRole(VoluntarioRol.class));
+        }catch (Exception e){
+            System.out.println("Error processing adoption: " + e.getMessage());
+        }
     }
 }
