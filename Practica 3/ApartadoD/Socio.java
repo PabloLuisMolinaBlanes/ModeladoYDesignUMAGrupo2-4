@@ -1,13 +1,26 @@
-import java.util.Date;
+package ApartadoD;
 
-public abstract class Socio {
+import java.util.*;
+
+public class Socio {
     private Date registro;
     private Refugio refugio;
 
+    private final Map<Class<?>, Object> roles = new HashMap<>();
+
     public Socio(Date registro, Refugio refugio) {
-        this.setRegistro(registro);
-        this.setRefugio(refugio);
+        this.registro = registro;
+        this.refugio = refugio;
     }
+
+    public <T> void addRole(Class<T> roleType, T role) {
+        roles.put(roleType, role);
+    }
+
+    public <T> T getRole(Class<T> roleType) {
+        return roleType.cast(roles.get(roleType));
+    }
+
     public Date getRegistro() {
         return registro;
     }
@@ -23,4 +36,5 @@ public abstract class Socio {
     public void setRefugio(Refugio refugio) {
         this.refugio = refugio;
     }
+
 }

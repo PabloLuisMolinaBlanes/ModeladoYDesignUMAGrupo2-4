@@ -1,3 +1,9 @@
+package ApartadoA.refugio.staff;
+
+import ApartadoA.refugio.animales.Animal;
+import ApartadoA.refugio.animales.EstadoAnimal;
+import ApartadoA.refugio.socios.Socio;
+
 import java.util.ArrayList;
 
 public class Refugio {
@@ -12,22 +18,23 @@ public class Refugio {
         this.animalesRegistrados = new ArrayList<Animal>();
         this.sociosRegistrados = new ArrayList<Socio>();
     }
-	/**
-	 * 
-	 * @param a
-	 */
-    public void registrar(Animal a) {
-        a.setEstado(EstadoAnimal.disponible);
-        this.animalesRefugiados.add(a);
-        this.animalesRegistrados.add(a);
+
+    void registrar(Animal animal) {
+        animal.setEstado(EstadoAnimal.disponible);
+        this.animalesRefugiados.add(animal);
+        this.animalesRegistrados.add(animal);
     }
     
     public Float getLiquidez() {
         return liquidez;
     }
     
-    public void setLiquidez(Float liquidez) {
+    private void setLiquidez(Float liquidez) {
         this.liquidez = liquidez;
+    }
+    
+    public void recibirDonacion(Float cantidad) {
+        this.liquidez += cantidad;
     }
     
     public ArrayList<Animal> getAnimalesRefugiados() {

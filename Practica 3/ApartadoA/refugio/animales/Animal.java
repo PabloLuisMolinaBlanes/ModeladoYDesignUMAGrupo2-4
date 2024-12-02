@@ -1,3 +1,7 @@
+package ApartadoA.refugio.animales;
+
+import ApartadoA.refugio.acciones.Adopcion;
+
 import java.util.Date;
 
 public class Animal {

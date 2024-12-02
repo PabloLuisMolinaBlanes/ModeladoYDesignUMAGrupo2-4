@@ -1,3 +1,5 @@
+package ApartadoA.refugio.acciones;
+
 import java.util.Date;
 
 public class Donacion {

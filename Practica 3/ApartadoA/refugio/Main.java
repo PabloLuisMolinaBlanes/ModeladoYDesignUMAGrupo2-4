@@ -1,3 +1,12 @@
+package ApartadoA.refugio;
+
+import ApartadoA.refugio.animales.Animal;
+import ApartadoA.refugio.animales.EstadoAnimal;
+import ApartadoA.refugio.socios.Adoptante;
+import ApartadoA.refugio.socios.Donante;
+import ApartadoA.refugio.staff.Refugio;
+import ApartadoA.refugio.staff.Voluntario;
+
 import java.util.Date;
 
 public class Main {
@@ -28,7 +37,7 @@ public class Main {
 
         // Process an adoption
         try {
-            voluntario.tramitarAdopcion(animal, adoptante);
+            adoptante.adoptar(animal, voluntario);
             System.out.println("Adoption processed successfully!");
 
             // Check animal's status
@@ -38,8 +47,7 @@ public class Main {
             System.out.println("Shelter's current funds: $" + refugio.getLiquidez());
 
             // Print number of registered animals
-            System.out.println("Number of registered animals: " +
-                    refugio.getAnimalesRegistrados().size());
+            System.out.println("Number of registered animals: " + refugio.getAnimalesRegistrados().size());
 
         } catch (Exception e) {
             System.out.println("Error processing adoption: " + e.getMessage());
