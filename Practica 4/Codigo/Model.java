@@ -1,21 +1,21 @@
 public class Model {
 
-	private string name;
-	private integer pricePerDay;
+	private String name;
+	private int pricePerDay;
 
-	public string getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(string name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public integer getPricePerDay() {
+	public int getPricePerDay() {
 		return this.pricePerDay;
 	}
 
-	public void setPricePerDay(integer pricePerDay) {
+	public void setPricePerDay(int pricePerDay) {
 		this.pricePerDay = pricePerDay;
 	}
 

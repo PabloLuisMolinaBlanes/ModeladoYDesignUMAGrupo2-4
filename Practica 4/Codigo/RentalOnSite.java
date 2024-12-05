@@ -1,12 +1,12 @@
 public class RentalOnSite extends Rental {
 
-	private string comments;
+	private String comments;
 
-	public string getComments() {
+	public String getComments() {
 		return this.comments;
 	}
 
-	public void setComments(string comments) {
+	public void setComments(String comments) {
 		this.comments = comments;
 	}
 

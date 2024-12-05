@@ -1,13 +1,13 @@
 public class RentalOffice {
 
-	private string address;
+	private String address;
 	private int feeForDelivery;
 
-	public string getAddress() {
+	public String getAddress() {
 		return this.address;
 	}
 
-	public void setAddress(string address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 

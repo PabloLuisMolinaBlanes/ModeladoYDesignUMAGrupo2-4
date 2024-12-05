@@ -1,6 +1,7 @@
 public class WebRental extends Rental {
 
 	private int[] deliveryTime;
+	private RentalOffice deliveryOffice;
 
 	public int[] getDeliveryTime() {
 		return this.deliveryTime;
@@ -10,4 +11,11 @@ public class WebRental extends Rental {
 		this.deliveryTime = deliveryTime;
 	}
 
+	public RentalOffice getDeliveryOffice() {
+		return deliveryOffice;
+	}
+
+	public void setDeliveryOffice(RentalOffice deliveryOffice) {
+		this.deliveryOffice = deliveryOffice;
+	}
 }
