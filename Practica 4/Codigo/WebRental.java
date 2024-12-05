@@ -3,6 +3,10 @@ public class WebRental extends Rental {
 	private int[] deliveryTime;
 	private RentalOffice deliveryOffice;
 
+	public WebRental() {
+		super();
+	}
+
 	public int[] getDeliveryTime() {
 		return this.deliveryTime;
 	}
