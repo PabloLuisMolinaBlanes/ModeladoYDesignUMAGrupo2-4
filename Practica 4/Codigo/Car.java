@@ -4,6 +4,7 @@ public class Car {
 
 	private String licensePlate;
 	private Model model;
+
 	private Date backToService;
 
 	public Car(String licensePlate) {
