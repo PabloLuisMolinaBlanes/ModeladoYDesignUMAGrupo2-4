@@ -1,7 +1,10 @@
+import java.util.Date;
+
 public class Car {
 
 	private String licensePlate;
 	private Model model;
+	private Date backToService;
 
 	public Car(String licensePlate) {
 		this.licensePlate = licensePlate;
@@ -21,5 +24,12 @@ public class Car {
 
 	public void setModel(Model model) {
 		this.model = model;
+	}
+
+	public void takeOutOfService(Date backToService) {
+		if (this.backToService == null)
+			return;
+		this.backToService = backToService;
+		
 	}
 }
