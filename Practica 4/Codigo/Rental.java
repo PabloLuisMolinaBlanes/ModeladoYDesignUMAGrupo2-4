@@ -7,6 +7,8 @@ public abstract class Rental {
 	private Date startDate;
 	private Date endDate;
 	private Car car;
+	private Discount discount;
+
 
 	public Customer getCustomer() {
 		return customer;
@@ -48,7 +50,15 @@ public abstract class Rental {
 		this.car = car;
 	}
 
-	public int getPrice(Discount discount) {
+	public Discount getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Discount discount) {
+		this.discount = discount;
+	}
+
+	public int getPrice() {
 		return discount.applyDiscount(car.getModel().getPricePerDay() * (int)(endDate.getDay() - startDate.getDay()));
 	}
 }
