@@ -6,8 +6,6 @@ public class Car {
 	private Model model;
 	private Date backToService;
 	private boolean esSustituto;
-	private State enServicio;
-	private State fueraServicio;
 	private State estadoActual;
 	
 	private RentalOffice rentalOffice;
@@ -16,13 +14,7 @@ public class Car {
 	public Car(String licensePlate) {
 		this.licensePlate = licensePlate;
 		this.esSustituto = false;
-		enServicio = new EnServicio(this);
-		fueraServicio = new FueraServicio(this);
-		estadoActual = enServicio;
-	}
-	
-	public void setBackToService(Date backToService) {
-		this.backToService = backToService;
+		estadoActual = new EnServicio(this);
 	}
 	
 	public RentalOffice getRentalOffice() {
@@ -62,10 +54,6 @@ public class Car {
 		this.estadoActual = actual;
 	}
 	
-	public State getFueraServicio() {
-		return this.fueraServicio;
-	}
-	
 	public State getEstadoActual() {
 		return this.estadoActual;
 	}
@@ -74,18 +62,16 @@ public class Car {
 		return this.esSustituto;
 	}
 	
-	public void setEsSustituto(boolean b) {
-		this.esSustituto=b;
+	public void setEsSustituto(boolean nuevoEstado) {
+		this.esSustituto=nuevoEstado;
 	}
 
 	public void takeOutOfService(Date backToService) {
-		
-		if(esSustituto == false) {
-			estadoActual.takeOutOfService(backToService);
-		} else {
-			fueraServicio.takeOutOfService(backToService);
-		}
-	
-		
+		if (esSustituto)
+			return;
+		estadoActual.takeOutOfService(backToService);
+	}
+	public void setBackToService(Date backToService) {
+		this.backToService = backToService;
 	}
 }

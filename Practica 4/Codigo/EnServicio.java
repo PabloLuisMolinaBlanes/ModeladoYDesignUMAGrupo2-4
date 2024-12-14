@@ -11,25 +11,22 @@ public class EnServicio implements State{
 	@Override
 	public void takeOutOfService(Date backToService) {
 		
-		coche.setEstadoActual(coche.getFueraServicio());
+		coche.setEstadoActual(new FueraServicio(coche));
 		
 		coche.setBackToService(backToService);
 		
 		String modelo = coche.getModel().getName();
 		ArrayList<Car> coches = coche.getRentalOffice().getCars();
 		boolean found= false;
-		for(int i = 0; i<coches.size() && ! found; i++) {
+		for(int i = 0; i<coches.size() && !found; i++) {
 			
 			Car cocheActual = coches.get(i);
 			
 			if(cocheActual.getModel().getName().equals(modelo) &&
-					! cocheActual.getEstadoActual().equals(cocheActual.getFueraServicio()) &&
+					(cocheActual.getEstadoActual() instanceof EnServicio)  &&
 					cocheActual.getEsSustituto() == false) {
-				
 				found = true;
-				
 				cocheActual.setEsSustituto(true);
-				
 			}		
 		}
 	}
