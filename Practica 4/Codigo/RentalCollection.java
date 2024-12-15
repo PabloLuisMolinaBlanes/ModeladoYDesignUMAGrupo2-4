@@ -41,7 +41,8 @@ public class RentalCollection implements Collection {
         Rental rental = (Rental) o;
         while (iterator.hasNext()) {
             Rental rental2 = (Rental) iterator.next();
-            if (rental2.getStartDate().before(rental.getStartDate()) && rental2.getEndDate().after(rental.getEndDate())) {
+            if (rental2.getStartDate().before(rental.getEndDate()) &&
+                rental2.getEndDate().after(rental.getStartDate())) {
                 throw new RuntimeException("Los alquileres no pueden solaparse");
             }
         }

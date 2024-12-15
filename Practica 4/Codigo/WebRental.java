@@ -1,17 +1,21 @@
+import java.util.Date;
+
 public class WebRental extends Rental {
 
-	private int[] deliveryTime;
+	private int deliveryTime;
 	private RentalOffice deliveryOffice;
 
-	public WebRental() {
-		super();
+	public WebRental(Customer customer, RentalOffice pickupOffice, Date startDate, Car car, int deliveryTime, RentalOffice deliveryOffice) {
+		super(customer, pickupOffice, startDate, car);
+		setDeliveryTime(deliveryTime);
+		setDeliveryOffice(deliveryOffice);
 	}
 
-	public int[] getDeliveryTime() {
+	public int getDeliveryTime() {
 		return this.deliveryTime;
 	}
 
-	public void setDeliveryTime(int[] deliveryTime) {
+	public void setDeliveryTime(int deliveryTime) {
 		this.deliveryTime = deliveryTime;
 	}
 
@@ -20,9 +24,10 @@ public class WebRental extends Rental {
 	}
 
 	public void setDeliveryOffice(RentalOffice deliveryOffice) {
-		if (!this.deliveryOffice.getAddress().equals(super.pickupOffice.getAddress()) && this.deliveryTime != null && this.deliveryTime[0] >= 13) {
+		if (!deliveryOffice.getAddress().equals(super.pickupOffice.getAddress()) && this.deliveryTime >= 13) {
 			throw new RuntimeException("Si la oficina de recogida y de entrega de un alquiler web son diferentes, la hora de entrega del coche de alquiler tiene que ser anterior a las 13 horas.");
 		}
 		this.deliveryOffice = deliveryOffice;
+		this.getCar().setRentalOffice(deliveryOffice);
 	}
 }

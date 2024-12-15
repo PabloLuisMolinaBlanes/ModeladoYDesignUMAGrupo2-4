@@ -1,3 +1,4 @@
+import java.time.Duration;
 import java.util.Date;
 
 public abstract class Rental {
@@ -9,6 +10,12 @@ public abstract class Rental {
 	private Car car;
 	private Discount discount;
 
+	public Rental(Customer customer, RentalOffice pickupOffice, Date startDate, Car car) {
+		setCustomer(customer);
+		setCar(car);
+		setPickupOffice(pickupOffice);
+		setStartDate(startDate);
+	}
 
 	public Customer getCustomer() {
 		return customer;
@@ -23,7 +30,7 @@ public abstract class Rental {
 	}
 
 	public void setPickupOffice(RentalOffice pickupOffice) {
-		if (!car.getRentalOffice().getAddress().equals(pickupOffice.getAddress())) {
+		if (!car.getRentalOffice().equals(pickupOffice)) {
 			throw new RuntimeException("La oficina de recogida de un coche de alquiler tiene que ser la misma que la oficina donde está asignado el coche de alquiler.");
 		}
 		this.pickupOffice = pickupOffice;
@@ -34,7 +41,7 @@ public abstract class Rental {
 	}
 
 	public void setStartDate(Date startDate) {
-		if (this.endDate != null && startDate.after(this.endDate)) {
+		if (getEndDate() != null && startDate.after(this.endDate)) {
 			throw new RuntimeException("Fecha de inicio detectada después de fecha de fin");
 		}
 		this.startDate = startDate;
@@ -45,7 +52,7 @@ public abstract class Rental {
 	}
 
 	public void setEndDate(Date endDate) {
-		if (this.startDate != null && endDate.before(this.startDate)) {
+		if (getStartDate() != null && endDate.before(this.startDate)) {
 			throw new RuntimeException("Fecha de fin detectada antes de fecha de inicio");
 		}
 		this.endDate = endDate;
@@ -68,6 +75,6 @@ public abstract class Rental {
 	}
 
 	public int getPrice() {
-		return discount.applyDiscount(car.getModel().getPricePerDay() * (int)(endDate.getDay() - startDate.getDay()));
+		return getDiscount().applyDiscount(getCar().getModel().getPricePerDay() * (int) Duration.between(startDate.toInstant(), endDate.toInstant()).toDays());
 	}
 }

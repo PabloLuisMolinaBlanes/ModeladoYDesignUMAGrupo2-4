@@ -1,9 +1,11 @@
+import java.util.Date;
+
 public class RentalOnSite extends Rental {
 
 	private String comments;
 
-	public RentalOnSite() {
-		super();
+	public RentalOnSite(Customer customer, RentalOffice pickupOffice, Date startDate, Car car) {
+		super(customer, pickupOffice, startDate, car);
 	}
 
 	public String getComments() {

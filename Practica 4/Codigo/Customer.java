@@ -48,9 +48,9 @@ public class Customer {
 		int count = 0;
 		while(this.rentalIterator.hasNext()){
 			Rental rental = (Rental) this.rentalIterator.next();
-			if (rental.getClass().equals(WebRental.class)){
+			if (rental instanceof WebRental){
 				WebRental webRental = (WebRental) rental;
-				if (webRental.getDeliveryOffice() != webRental.getDeliveryOffice()){
+				if (webRental.getDeliveryOffice() != webRental.getPickupOffice()){
 					count++;
 				}
 			}
