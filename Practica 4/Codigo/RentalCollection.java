@@ -37,6 +37,14 @@ public class RentalCollection implements Collection {
 
     @Override
     public boolean add(Object o) {
+        Iterator iterator = this.iterator();
+        Rental rental = (Rental) o;
+        while (iterator.hasNext()) {
+            Rental rental2 = (Rental) iterator.next();
+            if (rental2.getStartDate().before(rental.getStartDate()) && rental2.getEndDate().after(rental.getEndDate())) {
+                throw new RuntimeException("Los alquileres no pueden solaparse");
+            }
+        }
         return rentals.add((Rental) o);
     }
 

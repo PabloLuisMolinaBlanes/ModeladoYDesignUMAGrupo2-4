@@ -23,6 +23,9 @@ public abstract class Rental {
 	}
 
 	public void setPickupOffice(RentalOffice pickupOffice) {
+		if (!car.getRentalOffice().getAddress().equals(pickupOffice.getAddress())) {
+			throw new RuntimeException("La oficina de recogida de un coche de alquiler tiene que ser la misma que la oficina donde está asignado el coche de alquiler.");
+		}
 		this.pickupOffice = pickupOffice;
 	}
 
@@ -31,6 +34,9 @@ public abstract class Rental {
 	}
 
 	public void setStartDate(Date startDate) {
+		if (this.endDate != null && startDate.after(this.endDate)) {
+			throw new RuntimeException("Fecha de inicio detectada después de fecha de fin");
+		}
 		this.startDate = startDate;
 	}
 
@@ -39,6 +45,9 @@ public abstract class Rental {
 	}
 
 	public void setEndDate(Date endDate) {
+		if (this.startDate != null && endDate.before(this.startDate)) {
+			throw new RuntimeException("Fecha de fin detectada antes de fecha de inicio");
+		}
 		this.endDate = endDate;
 	}
 

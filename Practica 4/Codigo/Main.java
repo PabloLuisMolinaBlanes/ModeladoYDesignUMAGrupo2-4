@@ -48,11 +48,11 @@ public class Main {
         Rental rental2 = new WebRental();
         rental2.setCar(car2);
         rental2.setStartDate(new Date());
-        rental1.setPickupOffice(rentalOffice2);
+        rental2.setPickupOffice(rentalOffice2);
         Rental rental3 = new RentalOnSite();
-        rental1.setCar(car3);
+        rental3.setCar(car3);
         rental3.setStartDate(new Date());
-        rental1.setPickupOffice(rentalOffice3);
+        rental3.setPickupOffice(rentalOffice3);
         Discount discountAmount = new DiscountAmount(3);
         Discount discountPercent = new DiscountPercents(10);
         Discount noDiscount = new NoDiscount();
