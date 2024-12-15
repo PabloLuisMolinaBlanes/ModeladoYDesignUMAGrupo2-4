@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Model {
 
 	private String name;
 	private int pricePerDay;
-	private ArrayList<Car> cars;
+	private List<Car> cars;
 
 	public String getName() {
 		return this.name;
@@ -22,11 +23,11 @@ public class Model {
 		this.pricePerDay = pricePerDay;
 	}
 
-	public ArrayList<Car> getCars() {
+	public List<Car> getCars() {
 		return this.cars;
 	}
 
-	public void setCars(ArrayList<Car> cars) {
+	public void setCars(List<Car> cars) {
 		this.cars = cars;
 	}
 

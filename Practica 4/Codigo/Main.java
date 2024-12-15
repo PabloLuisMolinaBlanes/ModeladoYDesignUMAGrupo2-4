@@ -4,11 +4,6 @@ import java.util.Date;
 public class Main {
     private static final int THREE_DAYS_IN_MILLIS = 24 * 60 * 60 * 1000 * 3;
     public static void main(String[] args) {
-        Car car1 = new Car("car_1");
-        Car car2 = new Car("car_2");
-        Car car3 = new Car("car_3");
-        Car car4 = new Car("car_4");
-        Car car5 = new Car("car_5");
 
         Model model1 = new Model();
         model1.setName("model_1");
@@ -18,11 +13,11 @@ public class Main {
         model2.setName("model_2");
         model2.setPricePerDay(70);
 
-        car1.setModel(model1);
-        car2.setModel(model2);
-        car3.setModel(model2);
-        car4.setModel(model1);
-        car5.setModel(model1);
+        Car car1 = new Car("car_1", model1);
+        Car car2 = new Car("car_2", model2);
+        Car car3 = new Car("car_3", model2);
+        Car car4 = new Car("car_4", model1);
+        Car car5 = new Car("car_5", model2);
 
         Customer customer = new Customer("a","a");
 

@@ -1,39 +1,39 @@
-import java.util.ArrayList;
+import java.util.List;
 
 public class RentalOffice {
 
 	private String address;
 	private int feeForDelivery;
-	private ArrayList<Car> cars;
-	private ArrayList<Rental> rentals;
-	private ArrayList<WebRental> webRentals;
+	private List<Car> cars;
+	private List<Rental> rentals;
+	private List<WebRental> webRentals;
 
 	public RentalOffice(String address, int feeForDelivery) {
 		this.address = address;
 		this.feeForDelivery = feeForDelivery;
 	}
 
-	public ArrayList<Car> getCars() {
+	public List<Car> getCars() {
 		return this.cars;
 	}
 
-	public void setCars(ArrayList<Car> cars) {
+	public void setCars(List<Car> cars) {
 		this.cars = cars;
 	}
 
-	public ArrayList<Rental> getRentals() {
+	public List<Rental> getRentals() {
 		return this.rentals;
 	}
 
-	public void setRentals(ArrayList<Rental> rentals) {
+	public void setRentals(List<Rental> rentals) {
 		this.rentals = rentals;
 	}
 
-	public ArrayList<WebRental> getWebRentals() {
+	public List<WebRental> getWebRentals() {
 		return this.webRentals;
 	}
 
-	public void setWebRentals(ArrayList<WebRental> webRentals) {
+	public void setWebRentals(List<WebRental> webRentals) {
 		this.webRentals = webRentals;
 	}
 

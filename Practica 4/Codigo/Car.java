@@ -5,27 +5,28 @@ public class Car {
 	private String licensePlate;
 	private Model model;
 	private Date backToService;
-	private boolean esSustituto;
-	private State estadoActual;
+	private boolean isSubstitute;
+	private State currentState;
 	
 	private RentalOffice rentalOffice;
-	private ArrayList<Rental> rentals;
+	private List<Rental> rentals;
 
-	public Car(String licensePlate) {
-		this.licensePlate = licensePlate;
-		this.esSustituto = false;
-		estadoActual = new EnServicio(this);
+	public Car(String licensePlate, Model model) {
+		setLicensePlate(licensePlate);
+		setModel(model);
+		setIsSubstitute(false);
+		setCurrentState(new InService(this));
 	}
 	
 	public RentalOffice getRentalOffice() {
 		return this.rentalOffice;
 	}
 
-	public ArrayList<Rental> getRentals() {
+	public List<Rental> getRentals() {
 		return this.rentals;
 	}
 
-	public void setRentals(ArrayList<Rental> rentals) {
+	public void setRentals(List<Rental> rentals) {
 		this.rentals = rentals;
 	}
 
@@ -50,26 +51,26 @@ public class Car {
 		this.model = model;
 	}
 	
-	public void setEstadoActual(State actual) {
-		this.estadoActual = actual;
+	public void setCurrentState(State currentState) {
+		this.currentState = currentState;
 	}
 	
-	public State getEstadoActual() {
-		return this.estadoActual;
+	public State getCurrentState() {
+		return this.currentState;
 	}
 	
-	public boolean getEsSustituto() {
-		return this.esSustituto;
+	public boolean isSubstitute() {
+		return this.isSubstitute;
 	}
 	
-	public void setEsSustituto(boolean nuevoEstado) {
-		this.esSustituto=nuevoEstado;
+	public void setIsSubstitute(boolean isSubstitute) {
+		this.isSubstitute = isSubstitute;
 	}
 
 	public void takeOutOfService(Date backToService) {
-		if (esSustituto)
+		if (isSubstitute)
 			return;
-		estadoActual.takeOutOfService(backToService);
+		currentState.takeOutOfService(backToService);
 	}
 	public void setBackToService(Date backToService) {
 		this.backToService = backToService;
